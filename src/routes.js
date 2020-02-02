@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Home from './pages/Home';
 import Cart from './pages/Cart';
+import Header from './components/Header';
 
 const Routes = createAppContainer(
   createStackNavigator(

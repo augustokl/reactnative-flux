@@ -1,12 +1,29 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react';
+import { Text } from 'react-native';
+import api from '../../services/api';
 
-// import { Container } from './styles';
+import { Container, ProductList } from './styles';
 
-export default function Home({ navigation }) {
-  return (
-    <View>
-      <Text onPress={() => navigation.navigate('Cart')}>Hello Home</Text>
-    </View>
-  );
+export default class Home extends Component {
+  state = {
+    productList: [],
+  };
+
+  async componentDidMount() {
+    const response = await api.get('/products');
+
+    this.setState({ productList: response.data });
+  }
+
+  render() {
+    const { navigation } = this.props;
+    const { productList } = this.state;
+    return (
+      <Container>
+        <ProductList>
+          <Text onPress={() => navigation.navigate('Cart')}>Hello Home</Text>
+        </ProductList>
+      </Container>
+    );
+  }
 }
